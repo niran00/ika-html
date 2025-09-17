@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Header Example</title>
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+   <link href="dist/output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+<!-- HEADER -->
+<header class="border-b bg-white sticky top-0 z-50">
+
+
+<!-- Mobile Drawer -->
+<div id="mobileMenu" class="fixed top-0 left-0 h-full w-full sm:w-[350px] bg-white transform -translate-x-full transition-transform z-50 overflow-y-auto">
+  <!-- Drawer Header -->
+  <div class="p-4 border-b flex justify-between items-center">
+    <h2 class="text-lg font-semibold">Menu</h2>
+    <button id="closeMobileMenu" class="py-1 text-gray-700 text-2xl font-bold">✕</button>
+  </div>
+
+  <div className="overflow-y-auto h-full py-4">
+        <div className="px-2 pb-4 border-b">
+  <!-- Tabs and Categories -->
+  <div class="bg-gray-50 flex flex-col">
+    <div id="tabs" class="flex border-b border-gray-300">
+      <button class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600" data-tab="Lab">
+        <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/start_4_divisions_lab.webp" class="w-full h-24 object-cover rounded-md"><br>Lab
+      </button>
+      <button class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600" data-tab="Process">
+        <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/start_4_divisions_proc.webp" class="w-full h-24 object-cover rounded-md"><br>Process
+      </button>
+      <button class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600" data-tab="Biosolution">
+        <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/start_4_divisions_bat.webp" class="w-full h-24 object-cover rounded-md"><br>Biosolution
+      </button>
+      <button class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600" data-tab="EV-battery">
+        <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/start_4_divisions_bio_new4.webp" class="w-full h-24 object-cover rounded-md"><br>EV-battery
+      </button>
+    </div>
+
+        </div>
+    </div>
+
+    <!-- Categories container -->
+    <div id="categories" class="p-4"></div>
+
+    <!-- Extra navigation items -->
+    <nav id="navItems" class="flex flex-wrap gap-2 p-4"></nav>
+  </div>
+</div>
+  
+
+  <!-- Main header -->
+  <div class="px-4 py-4">
+    <div class="px-8 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <a href="/" class="text-2xl font-bold text-blue-600">
+          <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/logo.webp" width="80">
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <div class="relative group" id="productsMenu">
+          <button class="flex items-center gap-1 text-gray-700 hover:text-blue-600 transition-colors py-2 text-sm font-medium">
+            Products
+            <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+        </div>
+        <a href="/services" class="text-gray-700 hover:text-blue-600 py-2 text-sm">Services</a>
+        <a href="/knowledge" class="text-gray-700 hover:text-blue-600 py-2 text-sm">Knowledge Center</a>
+        <a href="/company" class="text-gray-700 hover:text-blue-600 py-2 text-sm">Company</a>
+        <a href="/career" class="text-gray-700 hover:text-blue-600 py-2 text-sm">Career</a>
+        <a href="/contact" class="text-gray-700 hover:text-blue-600 py-2 text-sm">Contact</a>
+      </nav>
+
+      
+      <div class="hidden md:flex items-center gap-4" id="desktop-icons">
+
+  <!-- Cart -->
+  <div class="relative">
+    <button id="cart-btn" class="p-2 rounded hover:bg-gray-100 focus:outline-none" aria-label="Cart">
+      <!-- shopping cart SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide text-gray-700 lucide-shopping-cart-icon lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+    </button>
+  </div>
+
+  <!-- User -->
+  <div class="relative">
+    <button id="user-btn" class="p-2 rounded hover:bg-gray-100 focus:outline-none" aria-haspopup="true" aria-expanded="false" aria-label="User menu">
+      <!-- user SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide text-gray-700 lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </button>
+
+    <div id="user-menu" class="hidden absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-md py-1 text-sm z-20">
+      <button class="w-full text-left px-3 py-2 hover:bg-gray-50">Sign in</button>
+      <button class="w-full text-left px-3 py-2 hover:bg-gray-50">My account</button>
+      <button class="w-full text-left px-3 py-2 hover:bg-gray-50">Orders</button>
+    </div>
+  </div>
+
+  <div class="relative">
+    <button id="cart-btn" class="p-2 rounded hover:bg-gray-100 focus:outline-none" aria-label="Cart">
+      <!-- shopping cart SVG -->
+     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide text-gray-700 lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+    </button>
+  </div>
+
+  <!-- Flag dropdown -->
+  <div class="relative">
+    <button id="flag-btn" class="flex items-center gap-1 px-3 py-1 rounded hover:bg-gray-100 focus:outline-none" aria-haspopup="true" aria-expanded="false">
+      <span id="selected-flag" class="text-xl leading-none">🇩🇪</span>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+      </svg>
+    </button>
+
+    <div id="flag-menu" class="hidden absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-md z-20">
+      <ul class="divide-y">
+        <li><button class="w-full text-left px-3 py-2 hover:bg-gray-50 flag-option" data-flag="🇩🇪" data-code="EN">🇩🇪 </button></li>
+        <li><button class="w-full text-left px-3 py-2 hover:bg-gray-50 flag-option" data-flag="🇹🇭" data-code="TH">🇹🇭 </button></li>
+        <li><button class="w-full text-left px-3 py-2 hover:bg-gray-50 flag-option" data-flag="🇫🇷" data-code="FR">🇫🇷 </button></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobileMenuBtn" class="md:hidden p-2">
+        <svg class="h-6 w-6 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mega Menu -->
+  <div id="megaMenu" class="hidden absolute top-full left-0 w-full bg-white border-b border-gray-200 shadow-lg z-40">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+      <div class="grid grid-cols-12 gap-8">
+        
+        <!-- Sidebar -->
+        <div id="megaMenuSidebar" class="col-span-3 space-y-2"></div>
+        
+        <!-- Categories -->
+        <div id="megaMenuCategories" class="col-span-6 grid grid-cols-2 gap-8"></div>
+        
+        <!-- Featured -->
+        <div id="megaMenuFeatured" class="col-span-3"></div>
+
+      </div>
+    </div>
+  </div>
+
+</header>
+
+<!-- START OF MEGA MENU SCRIPT -->
+<script>
+
+
+const megaMenuData = {
+  "LABORATORY TECHNOLOGY": {
+    image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/start_4_divisions_lab.webp",
+    color: "bg-[#00599c]",
+    description: "Advanced laboratory equipment for research and development",
+    isActive: true,
+    categories: [
+      {
+        title: "SEPARATION",
+        items: [
+          { name: "Rotary Evaporators", description: "Efficient solvent removal and concentration", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" },
+          { name: "Centrifuges", description: "High-speed separation of liquids and solids", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/proc_technikum.jpg" },
+          { name: "Filtration Systems", description: "Reliable particle and impurity removal", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/start_4_divisions_proc.webp" }
+        ]
+      },
+      {
+        title: "ELECTROCHEMISTRY",
+        items: [
+          { name: "Electrochemistry Kit", description: "Comprehensive kit for electrochemical experiments", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process_sized.jpg" },
+          { name: "Screening System", description: "Automated platform for electrochemical screening", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" }
+        ]
+      },
+      {
+        title: "MIXING",
+        items: [
+          { name: "Magnetic Stirrers", description: "Compact mixers for homogeneous solutions", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" },
+          { name: "Overhead Stirrers", description: "Powerful mixing for viscous samples",  image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/proc_technikum.jpg"  },
+          { name: "Shakers", description: "Consistent shaking for various sample formats",  image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process_sized.jpg" },
+          { name: "Thermoshakers", description: "Shaking with temperature control", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/proc_technikum.jpg" }
+        ]
+      },
+      {
+        title: "CRUSHING",
+        items: [
+          { name: "Dispersers", description: "Efficient sample dispersion and homogenization", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" },
+          { name: "Mills", description: "Grinding and particle size reduction solutions", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" },
+          { name: "Single-Use Crushing / IVD", description: "Safe disposable solutions for diagnostics", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" }
+        ]
+      },
+      {
+        title: "MEASURING VISCOSITY",
+        items: [
+          { name: "Measuring Stirrers", description: "Measure and control viscosity with stirring", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" },
+          { name: "Viscometers", description: "Precise viscosity measurement instruments", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/proc_technikum.jpg" }
+        ]
+      },
+      {
+        title: "HEATING / COOLING / TEMPERING",
+          items: [
+            { name: "Dry Block Heater", description: "Compact heating for tubes and vials", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" },
+            { name: "Heating Baths", description: "Temperature-controlled heating baths", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/proc_technikum.jpg" },
+            { name: "Hot Plates", description: "Reliable flat-surface heating", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process_sized.jpg" },
+            { name: "Temperature Control", description: "Precise heating and cooling regulation", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/proc_technikum.jpg" },
+            { name: "Tempering Chambers", description: "Chambers for controlled sample conditioning", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" }
+        ]
+      }
+    ],
+  },
+   "BIOPROCESSING SOLUTIONS": {
+    image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/start_4_divisions_bio_new4.webp",
+    color: "bg-gray-600",
+    description: "Advanced bioreactor systems for pharmaceutical applications",
+    isActive: false,
+    categories: [
+      {
+        title: "BIOREACTORS",
+        items: [
+          { name: "HABITAT eco", description: "Energy-efficient bioreactor for cell growth", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" },
+          { name: "HABITAT cyt", description: "Optimized bioreactor for cytological research", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/proc_technikum.jpg" },
+          { name: "Single-Use Systems", description: "Flexible bioreactors for sterile workflows", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process_sized.jpg" }
+        ]
+      },
+      {
+        title: "FERMENTATION",
+        items: [
+          { name: "Microbial Fermentation", description: "Systems for scalable microbial fermentation", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/proc_technikum.jpg" },
+          { name: "Cell Culture", description: "Specialized solutions for mammalian cell growth", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" },
+          { name: "Perfusion Systems", description: "Continuous culture solutions with perfusion", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process_sized.jpg" }
+        ]
+      }
+    ],
+  },
+  "EV BATTERY SOLUTIONS": {
+    image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/start_4_divisions_bat.webp",
+    color: "bg-gray-600",
+    description: "Cutting-edge solutions for EV battery manufacturing",
+    isActive: false,
+    categories: [
+      {
+        title: "MATERIAL PROCESSING",
+        items: [
+          { name: "Cathode Materials", description: "Materials engineered for high-performance cathodes", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process_sized.jpg" },
+          { name: "Anode Materials", description: "Optimized materials for efficient anodes", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/proc_technikum.jpg" },
+          { name: "Electrolyte Prep", description: "Preparation systems for battery electrolytes", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" }
+        ]
+      },
+      {
+        title: "CELL MANUFACTURING",
+        items: [
+          { name: "Electrode Coating", description: "Uniform coating systems for battery electrodes", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/proc_technikum.jpg" },
+          { name: "Cell Assembly", description: "Automation-ready cell assembly equipment", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process_sized.jpg" },
+          { name: "Formation", description: "Formation systems for cell activation and testing", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" }
+        ]
+      }
+    ],
+  },
+  "PROCESS TECHNOLOGY": {
+    image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process_b.webp",
+    color: "bg-gray-600",
+    description: "Industrial-scale processing equipment and pilot plants",
+    isActive: false,
+    categories: [
+      {
+        title: "REACTOR SYSTEMS",
+        items: [
+          { name: "Synthesis Reactors", description: "Reactors for chemical synthesis applications", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/proc_technikum.jpg" },
+          { name: "High Viscosity Reactors", description: "Specialized reactors for high-viscosity media", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process_sized.jpg" }
+        ]
+      },
+      {
+        title: "VACUUM TECHNOLOGY",
+        items: [
+          { name: "Vacuum Pumps", description: "Reliable vacuum generation systems", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" },
+          { name: "Controllers", description: "Precision control of vacuum environments", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/proc_technikum.jpg" },
+          { name: "Systems", description: "Integrated vacuum system solutions", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process_sized.jpg" }
+        ]
+      },
+      {
+        title: "LIQUID HANDLING",
+        items: [
+          { name: "Pipettes", description: "Accurate liquid dispensing tools", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" }
+        ]
+      },
+      {
+        title: "CONTROLLING & MEASURING",
+        items: [
+          { name: "Laboratory Software", description: "Software for data acquisition and control", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/proc_technikum.jpg" }
+        ]
+      },
+      {
+        title: "CALORIMETRY",
+        items: [
+          { name: "Calorimeters", description: "Measure thermal reactions with precision", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process_sized.jpg" },
+          { name: "Decomposition Systems", description: "Analyze material breakdown safely", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-banner.webp" }
+        ]
+      },
+      {
+        title: "FLOW CHEMISTRY",
+        items: [
+          { name: "FLOW System", description: "Continuous chemical reaction systems", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/proc_technikum.jpg" }
+        ]
+      }
+    ],
+
+  },
+};
+
+
+let activeDivision = Object.keys(megaMenuData).find(k => megaMenuData[k].isActive);
+
+function renderMegaMenu() {
+  const sidebar = document.getElementById("megaMenuSidebar");
+  const categories = document.getElementById("megaMenuCategories");
+  const featured = document.getElementById("megaMenuFeatured");
+  sidebar.innerHTML = "";
+
+  // Render divisions
+  Object.keys(megaMenuData).forEach(name => {
+    const division = megaMenuData[name];
+    const div = document.createElement("div");
+    div.className = `
+        p-3 rounded-lg flex gap-3 text-gray-700 cursor-pointer items-center 
+        ${activeDivision === name ? "text-white bg-[#00599c]" : "bg-gray-100"}
+
+    `;
+    div.innerHTML = `
+      <div class="w-16 h-16 bg-white/20 rounded flex items-center justify-center">
+        <img src="${division.image}" class="max-w-full max-h-full">
+      </div>
+      <span class="text-sm font-medium  ">${name}</span>
+    `;
+    div.addEventListener("mouseenter", () => {
+      activeDivision = name;
+      renderMegaMenu();
+    });
+    sidebar.appendChild(div);
+  });
+
+  const current = megaMenuData[activeDivision];
+
+  // Render categories & items
+  categories.innerHTML = current.categories.map(cat => `
+    <div>
+      <h3 class="text-sm font-semibold text-gray-900 uppercase">${cat.title}</h3>
+      <ul class="space-y-2 mt-2">
+        ${cat.items.map(item => `
+          <li>
+            <a href="#"
+               class="block text-sm text-gray-600 hover:text-[#00599c]  mega-item"
+               data-division="${activeDivision}"
+               data-item="${item.name}">
+              ${item.name}
+            </a>
+          </li>`).join("")}
+      </ul>
+    </div>
+  `).join("");
+
+  // Default featured (division)
+  featured.innerHTML = `
+    <div class="bg-gray-50 rounded-lg p-6 h-full">
+      <img src="${current.image}" class="w-full h-40 object-cover mb-4 rounded">
+      <h4 class="text-lg font-bold text-[#00599c]">${activeDivision}</h4>
+      <p class="text-sm text-gray-600 mt-2">${current.description}</p>
+      <button class="mt-4 bg-[#00599c]  text-white py-2 px-4 rounded w-full">Learn More</button>
+    </div>
+  `;
+
+  // Add hover listeners to items
+  document.querySelectorAll(".mega-item").forEach(el => {
+    el.addEventListener("mouseenter", () => {
+      const divName = el.dataset.division;
+      const itemName = el.dataset.item;
+      const division = megaMenuData[divName];
+      let found;
+      division.categories.forEach(cat => {
+        const match = cat.items.find(i => i.name === itemName);
+        if (match) found = match;
+      });
+      if (found) {
+        featured.innerHTML = `
+          <div class="bg-gray-50 rounded-lg p-6 h-full">
+            <img src="${found.image}" class="w-full h-40 object-cover mb-4 rounded">
+            <h4 class="text-lg font-bold text-[#00599c] ">${found.name}</h4>
+            <p class="text-sm text-gray-600 mt-2">${found.description}</p>
+            <button class="mt-4 bg-[#00599c]  text-white py-2 px-4 rounded w-full">Learn More</button>
+          </div>
+        `;
+      }
+    });
+  });
+}
+
+renderMegaMenu();
+
+// Hover toggle with delay
+const productsMenu = document.getElementById("productsMenu");
+const megaMenu = document.getElementById("megaMenu");
+
+let closeTimeout;
+
+function showMegaMenu() {
+  clearTimeout(closeTimeout);
+  megaMenu.classList.remove("hidden");
+}
+
+function hideMegaMenu() {
+  megaMenu.classList.add("hidden");
+}
+
+function scheduleHideMegaMenu() {
+  clearTimeout(closeTimeout);
+  closeTimeout = setTimeout(() => {
+    hideMegaMenu();
+  }, 500); // 0.5 second delay
+}
+
+productsMenu.addEventListener("mouseenter", showMegaMenu);
+productsMenu.addEventListener("mouseleave", scheduleHideMegaMenu);
+
+megaMenu.addEventListener("mouseenter", showMegaMenu);
+megaMenu.addEventListener("mouseleave", scheduleHideMegaMenu);
+
+</script>
+<!-- END OF MEGA MENU SCRIPT -->
+
+<!-- START MOBILE MENU SCRIPT -->
+<script>
+// Product categories
+const productCategories = {
+  Lab: [
+    { id: "bioprocessing", name: "Bioprocessing", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/product1.webp", sub: ["Bioreactors"] },
+    { id: "electrochemistry", name: "Electrochemistry", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/product2.webp", sub: ["Electrochemistry Kit", "Screening System"] },
+    { id: "mixing", name: "Mixing", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/product3.webp", sub: ["Magnetic Stirrers", "Overhead Stirrers"] },
+  ],
+  Process: [
+    { id: "pilot_plant", name: "Pilot Plant", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/product4.webp", sub: ["Magic Lab","LABOR-PILOT","PROCESS-PILOT","magic PLANT"] },
+    { id: "inline_dispersersm_ills", name: "Inline dispersers / Mills", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process1.webp", sub: ["ULTRA-TURRAX UTL","UTL Economy Line","DISPAX-REACTOR DR"] },
+  ],
+  Biosolution: [
+    { id: "cell_culture", name: "Cell Culture", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process2.webp", sub: ["Bioreactor Classic","Wave Bioreactor","Single-Use Bioreactor"] },
+    { id: "fermentation", name: "Fermentation", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process2.webp", sub: ["Bench-top Fermentor","Pilot-scale Fermentor","Industrial Fermentor"] },
+  ],
+  "EV-battery": [
+    { id: "battery_types", name: "Battery Types", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/product3.webp", sub: ["Lithium-Ion","Solid State","Nickel-Metal Hydride"] },
+    { id: "battery_components", name: "Battery Components", image: "/Users/nirunmillet/Desktop/ika-dev/ika-template/public/product4.webp", sub: ["Anodes","Cathodes","Electrolytes","Battery Management Systems (BMS)"] },
+  ]
+};
+
+// Navigation items example
+const navigationItems = [
+  { name: "Services", href: "/services", hasDropdown: false },
+  { name: "Knowledge Center", href: "/knowledge", hasDropdown: false },
+  { name: "Company", href: "/company", hasDropdown: true },
+  { name: "Career", href: "/career" },
+  { name: "Contact", href: "/contact", hasDropdown: true },
+];
+
+// Example dropdown items
+const productSubItems = [
+  { label: "Bioreactors", image: "/product1.webp" },
+  { label: "Electrochemistry Kit", image: "/product2.webp" },
+];
+
+// Active dropdown tracking
+let activeDropdown = "";
+
+// Active tab
+let activeTab = "Lab";
+
+// Render categories
+function renderCategories(containerId, tab) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+  productCategories[tab].forEach(cat => {
+    const div = document.createElement("div");
+    div.className = "mb-2";
+
+    const btn = document.createElement("button");
+    btn.className = "w-full flex items-center p-3 text-left hover:bg-gray-50 rounded-lg transition-colors";
+    btn.innerHTML = `<img src="${cat.image}" class="rounded-sm w-16 mr-4"/>${cat.name}<span class="ml-auto">+</span>`;
+    
+    btn.onclick = () => {
+      const expanded = div.querySelector(".subcats");
+      if(expanded) {
+        expanded.remove();
+        btn.querySelector("span").innerText = "+";
+      } else {
+        const subDiv = document.createElement("div");
+        subDiv.className = "subcats ml-4 mt-2 space-y-1";
+        cat.sub.forEach(sub => {
+          const subBtn = document.createElement("button");
+          subBtn.className = "w-full text-left p-2 rounded-md hover:bg-gray-100 text-gray-700";
+          subBtn.innerText = sub;
+          subDiv.appendChild(subBtn);
+        });
+        div.appendChild(subDiv);
+        btn.querySelector("span").innerText = "-";
+      }
+    }
+
+    div.appendChild(btn);
+    container.appendChild(div);
+  });
+}
+
+// Render nav items
+function renderNavItems() {
+  const navContainer = document.getElementById("navItems");
+  navContainer.innerHTML = "";
+  navigationItems.forEach(item => {
+    const div = document.createElement("div");
+    div.className = item.name + "link";
+
+    const btn = document.createElement("button");
+    btn.className = "text-left py-2 px-3 rounded-md text-gray-700 hover:bg-gray-50 w-full";
+    btn.innerText = item.name;
+    btn.onclick = () => {
+      if(item.hasDropdown) {
+        activeDropdown = activeDropdown === item.name ? "" : item.name;
+        renderDropdownImages(div);
+      }
+    }
+
+    div.appendChild(btn);
+    navContainer.appendChild(div);
+  });
+}
+
+// Render dropdown images if "Products" is active
+function renderDropdownImages(parentDiv) {
+  const existing = parentDiv.querySelector(".dropdown");
+  if(existing) {
+    existing.remove();
+    return;
+  }
+  const dropdown = document.createElement("div");
+  dropdown.className = "dropdown w-full grid grid-cols-2 gap-4 p-4";
+  productSubItems.forEach(sub => {
+    const subDiv = document.createElement("div");
+    subDiv.className = "cursor-pointer hover:scale-105 transition-transform";
+
+    const img = document.createElement("img");
+    img.src = sub.image;
+    img.alt = sub.label;
+    img.className = "w-full h-24 object-cover rounded-md";
+
+    const p = document.createElement("p");
+    p.className = "text-center mt-2 text-sm font-medium";
+    p.innerText = sub.label;
+
+    subDiv.appendChild(img);
+    subDiv.appendChild(p);
+    dropdown.appendChild(subDiv);
+  });
+  parentDiv.appendChild(dropdown);
+}
+
+// Desktop tabs
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    activeTab = btn.dataset.tab;
+    renderCategories("categories", activeTab);
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("border-[#00599c]","text-[#00599c]"));
+    btn.classList.add("border-[#00599c]","text-[#00599c]");
+    btn.classList.remove("border-transparent","text-gray-600");
+  });
+});
+
+// Initial render
+renderCategories("categories", activeTab);
+renderNavItems();
+document.querySelector('.tab-btn[data-tab="Lab"]').classList.add("border-[#00599c]","text-[#00599c]");
+
+// Mobile menu toggle
+const mobileMenu = document.getElementById("mobileMenu");
+document.getElementById("mobileMenuBtn").addEventListener("click", () => {
+  mobileMenu.classList.remove("-translate-x-full");
+});
+document.getElementById("closeMobileMenu").addEventListener("click", () => {
+  mobileMenu.classList.add("-translate-x-full");
+});
+</script>
+<!-- END OF MOBILE MENU SCRIPT -->
+
+</body>
+</html>

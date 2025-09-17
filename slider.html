@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Embla Carousel Library</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+
+  <style>
+    .embType2 .embla {
+      max-width: 70rem;
+      margin: auto;
+      --slide-height: 19rem;
+      --slide-spacing: 1rem;
+      --slide-size: 100%;
+      --slide-spacing-sm: 1.6rem;
+      --slide-size-sm: 50%;
+      --slide-spacing-lg: 2rem;
+      --slide-size-lg: calc(100% / 3);
+    }
+    .embType2  .embla__viewport {
+      overflow: hidden;
+    }
+    .embType2  .embla__container {
+      display: flex;
+    }
+    .embType2  .embla__slide {
+      flex: 0 0 var(--slide-size);
+      padding-left: var(--slide-spacing);
+      min-width: 0;
+    }
+    @media (min-width: 750px) {
+      .embType2  .embla__slide {
+        flex: 0 0 var(--slide-size-sm);
+        padding-left: var(--slide-spacing-sm);
+      }
+    }
+    @media (min-width: 1200px) {
+      .embType2  .embla__slide {
+        flex: 0 0 var(--slide-size-lg);
+        padding-left: var(--slide-spacing-lg);
+      }
+    }
+    
+.embType2  .embla__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: calc((2.6rem - 1.4rem) / 2 * -1);
+}
+.embType2  .embla__dot {
+  -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.embType2  .embla__dot:after {
+  box-shadow: inset 0 0 0 0.2rem rgb(118, 109, 109);
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  content: '';
+}
+.embType2  .embla__dot--selected:after {
+  box-shadow: inset 0 0 0 0.2rem #00599c;
+}
+
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+
+   
+
+  <script>
+    const emblaNode = document.querySelector(".embla__viewport")
+    const prevBtn = document.getElementById("prevBtn")
+    const nextBtn = document.getElementById("nextBtn")
+    const dotsContainer = document.getElementById("embla-dots")
+
+    const embla = EmblaCarousel(emblaNode, {
+      loop: false,
+      slidesToScroll: 1,
+      align: "start"
+    })
+
+    const dots = []
+    const scrollSnaps = embla.scrollSnapList()
+
+    function createDots() {
+      scrollSnaps.forEach((_, i) => {
+        const dot = document.createElement("button")
+        dot.className = "embla__dot"
+        dot.addEventListener("click", () => embla.scrollTo(i))
+        dotsContainer.appendChild(dot)
+        dots.push(dot)
+      })
+    }
+
+    function updateDots() {
+      const selectedIndex = embla.selectedScrollSnap()
+      dots.forEach((dot, i) =>
+        dot.classList.toggle("embla__dot--selected", i === selectedIndex)
+      )
+    }
+
+    function toggleButtons() {
+      if (!embla.canScrollPrev()) prevBtn.disabled = true
+      else prevBtn.disabled = false
+      if (!embla.canScrollNext()) nextBtn.disabled = true
+      else nextBtn.disabled = false
+    }
+
+    prevBtn.addEventListener("click", embla.scrollPrev, false)
+    nextBtn.addEventListener("click", embla.scrollNext, false)
+
+    embla.on("select", () => {
+      updateDots()
+      toggleButtons()
+    })
+
+    createDots()
+    updateDots()
+    toggleButtons()
+  </script>
+</body>
+</html>

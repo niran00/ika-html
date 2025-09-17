@@ -6,49 +6,311 @@
   <title>Document</title>
   <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- <link href="dist/output.css" rel="stylesheet"> -->
+  
+  <style>
+
+    /* RobNoto Medium */
+    @font-face {
+      font-family: 'RobNoto';
+      src: url('/RobNoto-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    /* RobNoto Light */
+    @font-face {
+      font-family: 'RobNoto';
+      src: url('/RobNoto-Light.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+
+      /* Example usage */
+      body {
+        font-family: 'RobNoto', sans-serif;
+      }
+    
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: 500; /* Medium */
+      }
+    
+      p, a, span, li, button {
+        font-weight: 300; /* Light */
+      }
+
+
+  </style>
+
+   <style>
+    .heroEmbla .embla {
+      position: relative;
+      overflow: hidden;
+    }
+    .heroEmbla .embla__container {
+      display: flex;
+    }
+    .heroEmbla  .embla__slide {
+      flex: 0 0 100%;
+      min-width: 0;
+    }
+    .heroEmbla  .embla__button {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 9999px;
+      padding: 0.75rem;
+      transition: all 0.2s;
+    }
+    .heroEmbla  .embla__button:hover {
+      background: #00599c;
+      color: #fff;
+    }
+    .heroEmbla  .embla__dots {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.5rem;
+    }
+    .heroEmbla  .embla__dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ccc;
+      transition: background 0.3s;
+    }
+    .heroEmbla  .embla__dot--selected {
+      background: #00599c;
+    }
+  </style>
 </head>
-<body class="bg-gray-100">
 
-  <div class="relative w-full mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
-    <div class="relative w-full min-h-[500px]">
-      <img
-        src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/banner.png"
-        alt="IKA Company Building"
-        class="w-full h-full object-cover rounded-2xl"
-      />
 
-      <div class="absolute inset-0 flex flex-col max-w-5xl mx-auto justify-start items-start py-8 px-6">
-        <h2 class="text-2xl lg:text-4xl font-bold text-[#00599c] my-4">
-          Your Partner for Research & Production
-        </h2>
-        <p class="text-md lg:text-lg leading-relaxed text-[#464646]">
-          Our core competencies are mixing, dispersing, separation, and temperature control. From<br/>
-          R&amp;D to full-scale production, we help you efficiently scale your processes and products.
-        </p>
 
-        <div class="flex mt-6">
-          <button 
-            class="text-white bg-[#00599c] mr-6 px-8 py-3 rounded-md hover:bg-transparent hover:text-[#00599c] border-2 border-[#00599c] transition"
-          >
-            View Solutions
-          </button>
+<body class="bg-white">
 
-          <button
-            class="border-2 border-[#00599c] text-[#00599c] hover:bg-[#00599c] hover:text-white px-8 py-3 rounded-md bg-transparent transition"
-          >
-            Contact Us
+
+
+<!-- HEADER -->
+<header class="border-b bg-white sticky top-0 z-50">
+
+
+<!-- Mobile Drawer -->
+<div id="mobileMenu" class="fixed top-0 left-0 h-full w-full sm:w-[350px] bg-white transform -translate-x-full transition-transform z-50 overflow-y-auto">
+  <!-- Drawer Header -->
+  <div class="p-4 border-b flex justify-between items-center">
+    <h2 class="text-lg font-semibold">Menu</h2>
+    <button id="closeMobileMenu" class="py-1 text-gray-700 text-2xl font-bold">✕</button>
+  </div>
+
+  <div className="overflow-y-auto h-full py-4">
+        <div className="px-2 pb-4 border-b">
+  <!-- Tabs and Categories -->
+  <div class="bg-gray-50 flex flex-col">
+    <div id="tabs" class="flex border-b border-gray-300">
+      <button class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600" data-tab="Lab">
+        <img src="./public/start_4_divisions_lab.webp" class="w-full h-24 object-cover rounded-md"><br>Lab
+      </button>
+      <button class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600" data-tab="Process">
+        <img src="./public/start_4_divisions_proc.webp" class="w-full h-24 object-cover rounded-md"><br>Process
+      </button>
+      <button class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600" data-tab="Biosolution">
+        <img src="./public/start_4_divisions_bat.webp" class="w-full h-24 object-cover rounded-md"><br>Biosolution
+      </button>
+      <button class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600" data-tab="EV-battery">
+        <img src="./public/start_4_divisions_bio_new4.webp" class="w-full h-24 object-cover rounded-md"><br>EV-battery
+      </button>
+    </div>
+
+        </div>
+    </div>
+
+    <!-- Categories container -->
+    <div id="categories" class="p-4"></div>
+
+    <!-- Extra navigation items -->
+    <nav id="navItems" class="flex flex-wrap gap-2 p-4"></nav>
+  </div>
+</div>
+  
+
+  <!-- Main header -->
+  <div class="px-4 py-4">
+    <div class="px-8 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <div class="flex items-center gap-2">
+        <a href="/" class="text-2xl font-bold text-blue-600">
+          <img src="./public/logo.webp" width="80">
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <div class="relative group" id="productsMenu">
+          <button class="flex items-center gap-1 text-gray-700 hover:text-blue-600 transition-colors py-2 text-sm font-medium">
+            Products
+            <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </button>
         </div>
+        <a href="/services" class="text-gray-700 hover:text-blue-600 py-2 text-sm">Services</a>
+        <a href="/knowledge" class="text-gray-700 hover:text-blue-600 py-2 text-sm">Knowledge Center</a>
+        <a href="/company" class="text-gray-700 hover:text-blue-600 py-2 text-sm">Company</a>
+        <a href="/career" class="text-gray-700 hover:text-blue-600 py-2 text-sm">Career</a>
+        <a href="/contact" class="text-gray-700 hover:text-blue-600 py-2 text-sm">Contact</a>
+      </nav>
+
+      
+      <div class="hidden md:flex items-center gap-4" id="desktop-icons">
+
+  <!-- Cart -->
+  <div class="relative">
+    <button id="cart-btn" class="p-2 rounded hover:bg-gray-100 focus:outline-none" aria-label="Cart">
+      <!-- shopping cart SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide text-gray-700 lucide-shopping-cart-icon lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+    </button>
+  </div>
+
+  <!-- User -->
+  <div class="relative">
+    <button id="user-btn" class="p-2 rounded hover:bg-gray-100 focus:outline-none" aria-haspopup="true" aria-expanded="false" aria-label="User menu">
+      <!-- user SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide text-gray-700 lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </button>
+
+    <div id="user-menu" class="hidden absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-md py-1 text-sm z-20">
+      <button class="w-full text-left px-3 py-2 hover:bg-gray-50">Sign in</button>
+      <button class="w-full text-left px-3 py-2 hover:bg-gray-50">My account</button>
+      <button class="w-full text-left px-3 py-2 hover:bg-gray-50">Orders</button>
+    </div>
+  </div>
+
+  <div class="relative">
+    <button id="cart-btn" class="p-2 rounded hover:bg-gray-100 focus:outline-none" aria-label="Cart">
+      <!-- shopping cart SVG -->
+     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide text-gray-700 lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+    </button>
+  </div>
+
+  <!-- Flag dropdown -->
+  <div class="relative">
+    <button id="flag-btn" class="flex items-center gap-1 px-3 py-1 rounded hover:bg-gray-100 focus:outline-none" aria-haspopup="true" aria-expanded="false">
+      <span id="selected-flag" class="text-xl leading-none">🇩🇪</span>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+      </svg>
+    </button>
+
+    <div id="flag-menu" class="hidden absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-md z-20">
+      <ul class="divide-y">
+        <li><button class="w-full text-left px-3 py-2 hover:bg-gray-50 flag-option" data-flag="🇩🇪" data-code="EN">🇩🇪 </button></li>
+        <li><button class="w-full text-left px-3 py-2 hover:bg-gray-50 flag-option" data-flag="🇹🇭" data-code="TH">🇹🇭 </button></li>
+        <li><button class="w-full text-left px-3 py-2 hover:bg-gray-50 flag-option" data-flag="🇫🇷" data-code="FR">🇫🇷 </button></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobileMenuBtn" class="md:hidden p-2">
+        <svg class="h-6 w-6 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mega Menu -->
+  <div id="megaMenu" class="hidden absolute top-full left-0 w-full bg-white border-b border-gray-200 shadow-lg z-40">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+      <div class="grid grid-cols-12 gap-8">
+        
+        <!-- Sidebar -->
+        <div id="megaMenuSidebar" class="col-span-3 space-y-2"></div>
+        
+        <!-- Categories -->
+        <div id="megaMenuCategories" class="col-span-6 grid grid-cols-2 gap-8"></div>
+        
+        <!-- Featured -->
+        <div id="megaMenuFeatured" class="col-span-3"></div>
+
       </div>
     </div>
   </div>
+
+</header>
+
+
+  <div class="heroEmbla">
+    <section class="embla w-full mx-auto rounded-2xl shadow-2xl overflow-hidden">
+    <div class="embla__viewport">
+      <div class="embla__container">
+
+        <!-- Slide 1 -->
+        <div class="embla__slide relative w-full">
+          <img src="./public/banner.png" alt="IKA Company Building" class="w-full object-cover" />
+          <div class="absolute inset-0 flex flex-col max-w-5xl mx-auto justify-start items-start py-8 px-6">
+            <h2 class="text-2xl lg:text-4xl text-[#00599c] my-4">Your Partner for Research & Production</h2>
+            <p class="text-md lg:text-lg leading-relaxed text-[#464646]">
+              Our core competencies are mixing, dispersing, separation, and temperature control. From<br/>
+              R&amp;D to full-scale production, we help you efficiently scale your processes and products.
+            </p>
+            <div class="flex mt-6">
+              <button class="text-white bg-[#00599c] mr-6 px-8 py-3 rounded-md hover:bg-transparent hover:text-[#00599c] border-2 border-[#00599c] transition">
+                View Solutions
+              </button>
+              <button class="border-2 border-[#00599c] text-[#00599c] hover:bg-[#00599c] hover:text-white px-8 py-3 rounded-md bg-transparent transition">
+                Contact Us
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+         <div class="embla__slide relative w-full">
+          <img src="./public/banner.png" alt="IKA Company Building" class="w-full object-cover" />
+          <div class="absolute inset-0 flex flex-col max-w-5xl mx-auto justify-start items-start py-8 px-6">
+            <h2 class="text-2xl lg:text-4xl text-[#00599c] my-4">Your Partner for Research & Production</h2>
+            <p class="text-md lg:text-lg leading-relaxed text-[#464646]">
+              Our core competencies are mixing, dispersing, separation, and temperature control. From<br/>
+              R&amp;D to full-scale production, we help you efficiently scale your processes and products.
+            </p>
+            <div class="flex mt-6">
+              <button class="text-white bg-[#00599c] mr-6 px-8 py-3 rounded-md hover:bg-transparent hover:text-[#00599c] border-2 border-[#00599c] transition">
+                View Solutions
+              </button>
+              <button class="border-2 border-[#00599c] text-[#00599c] hover:bg-[#00599c] hover:text-white px-8 py-3 rounded-md bg-transparent transition">
+                Contact Us
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <!-- Arrows -->
+    <button class="embla__button absolute top-1/2 left-4 -translate-y-1/2" id="prevHero">
+      <i data-lucide="chevron-left"></i>
+    </button>
+    <button class="embla__button absolute top-1/2 right-4 -translate-y-1/2" id="nextHero">
+      <i data-lucide="chevron-right"></i>
+    </button>
+
+    <!-- Dots -->
+    <div class="embla__dots" id="heroDots"></div>
+  </section>
+
+  </div>  
 
   <!-- START OF SECTION 2 -->
 
   <section class="px-8 bg-white">
       <div class="grid grid-cols-1 relative lg:grid-cols-1 gap-8">
         <div class="text-center">
-          <h2 class="text-2xl lg:text-3xl font-bold text-[#00599c] my-8">
+          <h2 class="text-2xl lg:text-3xl  text-[#00599c] my-8">
             Find Your Solution
           </h2>
           <p class="text-md lg:text-lg leading-relaxed text-[#464646]">
@@ -91,7 +353,7 @@
         <!-- Branch 1 -->
         <div class="flex flex-col justify-between items-center text-center bg-white rounded-lg">
             <div class="w-full h-75 overflow-hidden rounded-md">
-            <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/lab-technology.png" alt="Lab" class="w-full h-full object-cover">
+            <img src="./public/lab-technology.png" alt="Lab" class="w-full h-full object-cover">
             </div>
             <p class="text-sm leading-relaxed text-[#464646] mt-4">
             IKA laboratory technology offers a wide range of innovative equiment for applications in research and development.
@@ -101,7 +363,7 @@
         <!-- Branch 2 -->
         <div class="flex flex-col justify-between items-center text-center bg-white rounded-lg">
             <div class="w-full h-75 overflow-hidden rounded-md">
-            <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/process-technology.png" alt="Process" class="w-full h-full object-cover">
+            <img src="./public/process-technology.png" alt="Process" class="w-full h-full object-cover">
             </div>
             <p class="text-sm leading-relaxed text-[#464646] mt-4">
             The Process Technology division of IKA offers turnkey solutions and state-of-the art manufacturing options.
@@ -111,7 +373,7 @@
         <!-- Branch 3 -->
         <div class="flex flex-col justify-between items-center text-center bg-white rounded-lg">
             <div class="w-full h-75 overflow-hidden rounded-md">
-            <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/ev-battery-solution.png" alt="EV Battery" class="w-full h-full object-cover">
+            <img src="./public/ev-battery-solution.png" alt="EV Battery" class="w-full h-full object-cover">
             </div>
             <p class="text-sm leading-relaxed text-[#464646] mt-4">
             IKA provides scalable and efficient machinery solutions to solve complex chanllenges in EV battery manufacturing.
@@ -121,7 +383,7 @@
         <!-- Branch 4 -->
         <div class="flex flex-col justify-between items-center text-center bg-white rounded-lg">
             <div class="w-full h-75 overflow-hidden rounded-md">
-            <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/bioprocessing-solution.png" alt="BioProcessing" class="w-full h-full object-cover">
+            <img src="./public/bioprocessing-solution.png" alt="BioProcessing" class="w-full h-full object-cover">
             </div>
             <p class="text-sm leading-relaxed text-[#464646] mt-4">
             We develop integrated solutions to meet our customer's evolving needs in the bioprocessing industry.
@@ -137,11 +399,11 @@
 
   <!-- START OF SECTION 4 -->
 
-    <section class="px-8 my-8 bg-white">
+    <section class="px-8 py-8 bg-white">
       <div class="grid grid-cols-1 relative lg:grid-cols-1 gap-8 p-4">
         <!-- Left column -->
         <div class="text-center">
-          <h2 class="text-3xl font-bold text-[#00599c] my-4">Our Services</h2>
+          <h2 class="text-3xl  text-[#00599c] my-4">Our Services</h2>
         </div>
       </div>
     </section>
@@ -150,7 +412,7 @@
       <div class="mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <!-- Left: Text -->
         <div class="px-12">
-          <h3 class="text-xl font-bold text-[#5F5F5F] my-4">
+          <h3 class="text-xl  text-[#5F5F5F] my-4">
             Service is more than support - it's a partnership
           </h3>
           <p class="text-gray-600 mb-8 leading-relaxed">
@@ -167,7 +429,7 @@
         <!-- Right: Image full-bleed -->
         <div class="relative">
           <img
-            src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/ika_staufen_1280x1280.webp"
+            src="./public/ika_staufen_1280x1280.webp"
             alt="IKA Company Building"
             class="w-screen h-full object-cover"
           />
@@ -177,7 +439,7 @@
       <div class="flex px-12 gap-10 my-12 items-stretch">
         <div
           style="
-            background-image: url('/Users/nirunmillet/Desktop/ika-dev/ika-template/public/vr-set.png');
+            background-image: url('./public/vr-set.png');
             background-position: top right;
             background-repeat: no-repeat;
             background-size: contain;
@@ -185,7 +447,7 @@
           class="flex flex-col justify-between w-1/2 rounded-2xl overflow-hidden p-6 bg-gray-200"
         >
           <div>
-            <h3 class="text-xl font-bold text-[#5F5F5F] mb-3">Enter Virtual Reality</h3>
+            <h3 class="text-xl  text-[#5F5F5F] mb-3">Enter Virtual Reality</h3>
             <p class="leading-relaxed text-[#464646]">Experience your solutions live today.</p>
           </div>
           <a href="#" class="mt-4 border border-blue-600 text-blue-600 hover:bg-blue-50 bg-white px-6 py-2 rounded self-start">
@@ -203,7 +465,7 @@
           class="flex flex-col justify-between w-1/2 rounded-2xl overflow-hidden p-6 bg-gray-200"
         >
           <div>
-            <h3 class="text-xl font-bold text-[#5F5F5F] mb-3">Application Support</h3>
+            <h3 class="text-xl  text-[#5F5F5F] mb-3">Application Support</h3>
             <p class="leading-relaxed text-[#464646]">We ensure you get the best device for your application</p>
           </div>
           <a href="#" class="mt-4 border border-blue-600 text-blue-600 hover:bg-blue-50 bg-white px-6 py-2 rounded self-start">
@@ -215,7 +477,7 @@
       <div class="flex px-12 gap-10 items-stretch">
         <div class="flex flex-col justify-between w-full rounded-2xl overflow-hidden p-6 bg-gray-200">
           <div>
-            <h3 class="text-xl font-bold text-[#5F5F5F] mb-3">Scale Faster, Save Costs, Ensure Consistency</h3>
+            <h3 class="text-xl  text-[#5F5F5F] mb-3">Scale Faster, Save Costs, Ensure Consistency</h3>
             <p class="leading-relaxed text-[#464646]">Ready to scale-up? Let's chat.</p>
           </div>
         
@@ -239,7 +501,7 @@
       <div class="grid grid-cols-1 relative lg:grid-cols-1 gap-8">
         <!-- Left column -->
         <div class="text-center">
-          <h2 class="text-2xl lg:text-3xl font-bold text-[#00599c] my-8">Our Industries</h2>
+          <h2 class="text-2xl lg:text-3xl  text-[#00599c] my-8">Our Industries</h2>
           <p class="text-md leading-relaxed text-[#464646]">
             In our new industry area, we combine products, services and many years of expertise to create
             <br>comprehensive solutions. 
@@ -249,18 +511,18 @@
         </div>
       </div>
 
-      <div class="my-8 text-center">
+      <div class="py-8 text-center">
        
         <div class="relative w-full aspect-[16/9]">
           <!-- Background image -->
-          <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/City-map-overview.png" alt="Interactive background" class="object-cover rounded-2xl w-full h-full">
+          <img src="./public/City-map-overview.png" alt="Interactive background" class="object-cover rounded-2xl w-full h-full">
 
             
   <!-- Pin 1 -->
   <a href="/recycle" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:14%; left:14%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/1_B.png" alt="Recycle" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/1_L.png" alt="Recycle Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/1_B.png" alt="Recycle" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/1_L.png" alt="Recycle Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Recycle
       </span>
@@ -270,8 +532,8 @@
   <!-- Pin 2 -->
   <a href="/greenhouse" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:65%; left:70%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/9_B.png" alt="Green house" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/9_L.png" alt="Green house Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/9_B.png" alt="Green house" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/9_L.png" alt="Green house Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Green house
       </span>
@@ -281,8 +543,8 @@
   <!-- Pin 3 -->
   <a href="/power-plant" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:20%; left:52%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/13_B.png" alt="Power Plant" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/13_L.png" alt="Power Plant Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/13_B.png" alt="Power Plant" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/13_L.png" alt="Power Plant Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Power Plant
       </span>
@@ -292,8 +554,8 @@
   <!-- Pin 4 -->
   <a href="/drainage" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:18%; left:11%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/2_B.png" alt="Drainage" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/2_L.png" alt="Drainage Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/2_B.png" alt="Drainage" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/2_L.png" alt="Drainage Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Drainage
       </span>
@@ -303,8 +565,8 @@
   <!-- Pin 5 -->
   <a href="/manufacturing" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:22%; left:31%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/3_B.png" alt="Manufacturing" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/3_L.png" alt="Manufacturing Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/3_B.png" alt="Manufacturing" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/3_L.png" alt="Manufacturing Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Manufacturing
       </span>
@@ -314,8 +576,8 @@
   <!-- Pin 6 -->
   <a href="/cosmetics" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:33%; left:20%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/6_B.png" alt="Cosmetics" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/6_L.png" alt="Cosmetics Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/6_B.png" alt="Cosmetics" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/6_L.png" alt="Cosmetics Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Cosmetics
       </span>
@@ -325,8 +587,8 @@
   <!-- Pin 7 -->
   <a href="/design" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:55%; left:18%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/7_B.png" alt="Design" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/7_L.png" alt="Design Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/7_B.png" alt="Design" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/7_L.png" alt="Design Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Design
       </span>
@@ -336,8 +598,8 @@
   <!-- Pin 8 -->
   <a href="/labratory" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:74%; left:31%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/10_B.png" alt="Labratory" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/10_L.png" alt="Labratory Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/10_B.png" alt="Labratory" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/10_L.png" alt="Labratory Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Labratory
       </span>
@@ -347,8 +609,8 @@
   <!-- Pin 9 -->
   <a href="/cantine" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:73%; left:50%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/5_B.png" alt="Cantine" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/5_L.png" alt="Cantine Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/5_B.png" alt="Cantine" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/5_L.png" alt="Cantine Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Cantine
       </span>
@@ -358,8 +620,8 @@
   <!-- Pin 10 -->
   <a href="/academy" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:51%; left:37%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/11_B.png" alt="Academy" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/11_L.png" alt="Academy Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/11_B.png" alt="Academy" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/11_L.png" alt="Academy Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Academy
       </span>
@@ -369,8 +631,8 @@
   <!-- Pin 11 -->
   <a href="/medcine" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:41%; left:56%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/14_B.png" alt="Medcine" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/14_L.png" alt="Medcine Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/14_B.png" alt="Medcine" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/14_L.png" alt="Medcine Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Medcine
       </span>
@@ -380,8 +642,8 @@
   <!-- Pin 12 -->
   <a href="/bio-lab" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:60%; left:50%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/15_B.png" alt="Bio Lab" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/15_L.png" alt="Bio Lab Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/15_B.png" alt="Bio Lab" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/15_L.png" alt="Bio Lab Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Bio Lab
       </span>
@@ -391,8 +653,8 @@
   <!-- Pin 13 -->
   <a href="/botany" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:52%; left:60%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/8_B.png" alt="Botany Research" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/8_L.png" alt="Botany Research Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/8_B.png" alt="Botany Research" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/8_L.png" alt="Botany Research Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Botany Research
       </span>
@@ -402,8 +664,8 @@
   <!-- Pin 14 -->
   <a href="/logistics" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:39%; left:68%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/12_B.png" alt="Logistics" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/12_L.png" alt="Logistics Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/12_B.png" alt="Logistics" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/12_L.png" alt="Logistics Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Logistics
       </span>
@@ -413,8 +675,8 @@
   <!-- Pin 15 -->
   <a href="/warehouse" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:46%; left:79%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/4_B.png" alt="Warehouse" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/4_L.png" alt="Warehouse Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/4_B.png" alt="Warehouse" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/4_L.png" alt="Warehouse Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Warehouse
       </span>
@@ -424,8 +686,8 @@
   <!-- Pin 16 -->
   <a href="/chemistry-plant" class="absolute transform -translate-x-1/2 -translate-y-1/2" style="top:24%; left:85%;">
     <div class="group relative flex items-center justify-center">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/16_B.png" alt="Chemistry plant" class="w-10 h-10 object-contain group-hover:hidden">
-      <img src="/Users/nirunmillet/Desktop/ika-dev/ika-template/public/Icons/16_L.png" alt="Chemistry plant Hover" class="w-10 h-10 object-contain hidden group-hover:block">
+      <img src="./public/Icons/16_B.png" alt="Chemistry plant" class="w-10 h-10 object-contain group-hover:hidden">
+      <img src="./public/Icons/16_L.png" alt="Chemistry plant Hover" class="w-10 h-10 object-contain hidden group-hover:block">
       <span class="absolute top-[-40px] left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-black text-white rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
         Chemistry plant
       </span>
@@ -443,147 +705,666 @@
 
   <!-- START OF SECTION 6 -->
 
-    <section style="background-color: white; padding: 2rem 1rem;">
-
-  <!-- Heading -->
-  <div style="text-align: center; max-width: 800px; margin: 0 auto;">
-    <h2 style="font-size: 2rem; font-weight: bold; color: #00599c; margin: 2rem 0;">Knowledge Base - Latest Articles</h2>
-    <p style="font-size: 1rem; line-height: 1.6; color: #464646;">
-      A collection of informative articles and practical examples showcasing a variety of applications in the laboratory field. 
-      Our goal is to<br>
-      provide you with insights and hands-on knowledge that will help you make your processes more efficient and successful.
-    </p>
+    <section class="bg-white">
+  <!-- Header -->
+  <div class="grid grid-cols-1 relative lg:grid-cols-1 gap-8">
+    <div class="text-center">
+      <h2 class="text-2xl lg:text-3xl  text-[#00599c] my-8">
+        Knowledge Base - Latest Articles
+      </h2>
+      <p class="text-md leading-relaxed text-[#464646]">
+        A collection of informative articles and practical examples showcasing a variety of applications in the laboratory field. 
+        Our goal is to<br>
+        provide you with insights and hands-on knowledge that will help you make your processes more efficient and successful.
+      </p>
+    </div>
   </div>
 
   <!-- Tabs -->
-  <div style="margin: 2rem 0; text-align: center;">
-    <div style="display: inline-grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 600px; margin: 0 auto;">
-      <button style="padding: 0.5rem 1rem; border: 1px solid #ccc; background: white; cursor: pointer;">Lab</button>
-      <button style="padding: 0.5rem 1rem; border: 1px solid #ccc; background: white; cursor: pointer;">Process</button>
-      <button style="padding: 0.5rem 1rem; border: 1px solid #ccc; background: white; cursor: pointer;">EV battery</button>
-      <button style="padding: 0.5rem 1rem; border: 1px solid #ccc; background: white; cursor: pointer;">Bioprocessing</button>
+  <div class="my-8">
+    <div class="w-1/2 mx-auto">
+      <div class="grid w-full grid-cols-4 border rounded-lg overflow-hidden">
+        <button class="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 border-r">Lab</button>
+        <button class="px-4 py-2 text-sm font-medium hover:bg-gray-100 border-r">Process</button>
+        <button class="px-4 py-2 text-sm font-medium hover:bg-gray-100 border-r">EV battery</button>
+        <button class="px-4 py-2 text-sm font-medium hover:bg-gray-100">Bioprocessing</button>
+      </div>
     </div>
   </div>
 
-  <!-- Articles Section -->
-  <div style="
-      background-image: url('/Users/nirunmillet/Desktop/ika-dev/ika-template/public/31969660_2102_m10_i921_n014.jpg');
+  <!-- Content section -->
+  <section
+    style="
+      background-image: url('./public/31969660_2102_m10_i921_n014.jpg');
       background-position: bottom right;
       background-repeat: no-repeat;
       background-size: contain;
-      min-height: 600px;
-      padding: 2rem 1rem;
-      background-color: white;
-    ">
+    "
+    class="min-h-[600px] px-8 bg-white"
+  >
+    <div class="p-4">
+      <div class="grid grid-cols-1 lg:grid-cols-8 gap-6">
+        
+        <!-- Products grid -->
+        <div class="lg:col-span-7  mt-8 gap-10">
+        
+            <section class="w-full mb-20 pb-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
     
-    <div style="max-width: 1200px; margin: 0 auto; padding: 1rem;">
-      <div style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 1.5rem;">
+                <!-- Product Card -->
+                <div class="bg-[#f5f5f7] border-none overflow-hidden hover:shadow-lg transition-transform transform duration-300 flex flex-col w-full">
+                  <div class="relative aspect-[4/3] overflow-hidden">
+                    <img
+                      src="./public/lab-3.webp"
+                      alt="Product Name"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+              
+                  <div class="text-start px-4 py-8 flex flex-col flex-grow">
+                    <h3 class="text-2xl text-[#00599c] font-light mb-2">
+                      Correcting Piping Techniques for Different Sample Types
+                    </h3>
+                    <p class="text-lg text-gray-600 mb-2 leading-relaxed">
+                      Optimizing pipetting techniques ensures accurate results accoss different sample types.
+                    </p>
+                    <div class="mt-auto">
+                      <a
+                        href="#"
+                        class="flex justify-center items-center text-[#00599c] text-base gap-1 hover:underline"
+                      >
+                        Read Article →
+                      </a>
+                    </div>
+                  </div>
+                </div>
+            
+                <!-- Duplicate card structure for more products -->
+                <div class="bg-[#f5f5f7] border-none overflow-hidden hover:shadow-lg transition-transform transform duration-300 flex flex-col w-full">
+                  <div class="relative aspect-[4/3] overflow-hidden">
+                    <img
+                      src="./public/labratory-banner.webp"
+                      alt="Another Product"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+              
+                  <div class="text-start px-4 py-8 flex flex-col flex-grow">
+                    <h3 class="text-2xl text-[#00599c] font-light mb-2">
+                      How to Choose the Best Lab Incubator?
+                    </h3>
+                    <p class="text-lg text-gray-600 mb-2 leading-relaxed">
+                      This guide will help you understand what to look for when choosing a lab incubator.
+                    </p>
+                    <div class="mt-auto">
+                      <a
+                        href="#"
+                        class="flex justify-center items-center text-[#00599c] text-base gap-1 hover:underline"
+                      >
+                        Read Article →
+                      </a>
+                    </div>
+                  </div>
+                </div>
 
-        <!-- Main carousel/content: 7/8 -->
-        <div style="grid-column: span 7;">
-          <!-- Replace this div with your carousel component -->
-          <div id="carousel" style="margin-top: 2rem;">
-            <!-- Example content -->
-            <section class="w-full px-4 py-8">
-  <h2 class="text-3xl font-bold text-gray-900 mb-6">Recommended Products</h2>
+                <!-- Duplicate card structure for more products -->
+                <div class="bg-[#f5f5f7] border-none overflow-hidden hover:shadow-lg transition-transform transform duration-300 flex flex-col w-full">
+                  <div class="relative aspect-[4/3] overflow-hidden">
+                    <img
+                      src="./public/lab-4.webp"
+                      alt="Another Product"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+              
+                  <div class="text-start px-4 py-8 flex flex-col flex-grow">
+                    <h3 class="text-2xl text-[#00599c] font-light mb-2">
+                      Bioreactors in Bioprocessing and How They Work
+                    </h3>
+                    <p class="text-lg text-gray-600 mb-2 leading-relaxed">
+                      This article explores what a bioreactor is and breaks down its key components, functionality, and the steps involved in the bioprocess workflow.
+                    </p>
+                    <div class="mt-auto">
+                      <a
+                        href="#"
+                        class="flex justify-center items-center text-[#00599c] text-base gap-1 hover:underline"
+                      >
+                        Read Article →
+                      </a>
+                    </div>
+                  </div>
+                </div>
+            
+                <!-- Add more cards as needed -->
+              </div>
+            </section>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-    <!-- Example product item -->
-    <div class="bg-[#f5f5f7] rounded-lg overflow-hidden hover:shadow-lg transition-transform transform duration-300 flex flex-col">
-      <div class="relative aspect-[4/3] overflow-hidden">
-        <img
-          src="placeholder.svg" 
-          alt="Product Name" 
-          class="w-full h-full object-cover"
-        />
-      </div>
-      <div class="px-4 py-6 flex flex-col flex-grow">
-        <h3 class="text-2xl text-[#00599c] font-light mb-2">Product Name</h3>
-        <p class="text-lg text-gray-600 mb-2 leading-relaxed">Product Category</p>
-        <div class="mt-auto">
-          <a href="#" class="flex justify-center items-center text-[#00599c] text-base gap-1 hover:underline">
-            Read Article
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
+          
         </div>
-      </div>
-    </div>
 
-    <!-- Repeat above block for each product -->
-    <div class="bg-[#f5f5f7] rounded-lg overflow-hidden hover:shadow-lg transition-transform transform duration-300 flex flex-col">
-      <div class="relative aspect-[4/3] overflow-hidden">
-        <img
-          src="placeholder.svg" 
-          alt="Product Name" 
-          class="w-full h-full object-cover"
-        />
-      </div>
-      
-      <div class="px-4 py-6 flex flex-col flex-grow">
-        <h3 class="text-2xl text-[#00599c] font-light mb-2">Product Name</h3>
-        <p class="text-lg text-gray-600 mb-2 leading-relaxed">Product Category</p>
-        <div class="mt-auto">
-          <a href="#" class="flex justify-center items-center text-[#00599c] text-base gap-1 hover:underline">
-            Read Article
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </div>
-      
-    </div>
-
-    <!-- Add more products as needed -->
-
-    <div class="bg-[#f5f5f7] rounded-lg overflow-hidden hover:shadow-lg transition-transform transform duration-300 flex flex-col">
-      <div class="relative aspect-[4/3] overflow-hidden">
-        <img
-          src="placeholder.svg" 
-          alt="Product Name" 
-          class="w-full h-full object-cover"
-        />
-      </div>
-      
-      <div class="px-4 py-6 flex flex-col flex-grow">
-        <h3 class="text-2xl text-[#00599c] font-light mb-2">Product Name</h3>
-        <p class="text-lg text-gray-600 mb-2 leading-relaxed">Product Category</p>
-        <div class="mt-auto">
-          <a href="#" class="flex justify-center items-center text-[#00599c] text-base gap-1 hover:underline">
-            Read Article
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </div>
-      
-    </div>
-
-  </div>
-</div>
-
-          </div>
-        </div>
-
-        <!-- Sidebar: 1/8 -->
-        <div style="grid-column: span 1; display: flex; align-items: center; justify-content: center;">
-          <button style="padding: 0.75rem 1.25rem; border: 2px solid #0066cc; background: white; color: #0066cc; cursor: pointer;">
+        <!-- Sidebar -->
+        <div class="lg:col-span-1 content-center rounded-xl p-5">
+          <button class="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 bg-transparent rounded-lg px-4 py-2">
             See all →
           </button>
         </div>
-
       </div>
     </div>
-
   </section>
-
 </section>
 
 
   <!-- END OF SECTION 6 -->
 
+  <!-- START OF SECTION 7 -->
+
+  <section 
+  class="px-8 mt-20 mb-16 bg-white h-[400px] flex items-center justify-center"
+  style="background-image: url('./public/word_map_background.webp'); background-position: center center; background-repeat: no-repeat; background-size: contain;"
+>
+  <div class="text-center max-w-[700px]">
+    <h2 class="text-2xl lg:text-3xl  text-[#00599c] my-8">
+      Your Career at IKA
+    </h2>
+    <p class="text-md lg:text-lg leading-relaxed text-[#464646]">
+      Ika is looking for world-class talents ready to tackle challenging projects and shape the future together.<br>
+      Become part of the IKA team.
+    </p>
+
+    <!-- Buttons section -->
+    <div class="flex justify-center gap-5 mt-8">
+      <button class="px-6 py-2 rounded-xl bg-[#00599c] text-white font-medium hover:bg-[#004880] transition">
+        Ika Careers
+      </button>
+      <button class="px-6 py-2 rounded-xl bg-gray-200 text-[#00599c] font-medium hover:bg-gray-300 transition">
+        Educational Programs
+      </button>
+    </div>
+  </div>
+</section>
+
+
+  <!-- END OF SECTION 7 -->
+
+
+
 </body>
+
+
+<!-- START OF MEGA MENU SCRIPT -->
+<script>
+
+
+const megaMenuData = {
+  "LABORATORY TECHNOLOGY": {
+    image: "./public/start_4_divisions_lab.webp",
+    color: "bg-[#00599c]",
+    description: "Advanced laboratory equipment for research and development",
+    isActive: true,
+    categories: [
+      {
+        title: "SEPARATION",
+        items: [
+          { name: "Rotary Evaporators", description: "Efficient solvent removal and concentration", image: "./public/process-banner.webp" },
+          { name: "Centrifuges", description: "High-speed separation of liquids and solids", image: "./public/proc_technikum.jpg" },
+          { name: "Filtration Systems", description: "Reliable particle and impurity removal", image: "./public/start_4_divisions_proc.webp" }
+        ]
+      },
+      {
+        title: "ELECTROCHEMISTRY",
+        items: [
+          { name: "Electrochemistry Kit", description: "Comprehensive kit for electrochemical experiments", image: "./public/process_sized.jpg" },
+          { name: "Screening System", description: "Automated platform for electrochemical screening", image: "./public/process-banner.webp" }
+        ]
+      },
+      {
+        title: "MIXING",
+        items: [
+          { name: "Magnetic Stirrers", description: "Compact mixers for homogeneous solutions", image: "./public/process-banner.webp" },
+          { name: "Overhead Stirrers", description: "Powerful mixing for viscous samples",  image: "./public/proc_technikum.jpg"  },
+          { name: "Shakers", description: "Consistent shaking for various sample formats",  image: "./public/process_sized.jpg" },
+          { name: "Thermoshakers", description: "Shaking with temperature control", image: "./public/proc_technikum.jpg" }
+        ]
+      },
+      {
+        title: "CRUSHING",
+        items: [
+          { name: "Dispersers", description: "Efficient sample dispersion and homogenization", image: "./public/process-banner.webp" },
+          { name: "Mills", description: "Grinding and particle size reduction solutions", image: "./public/process-banner.webp" },
+          { name: "Single-Use Crushing / IVD", description: "Safe disposable solutions for diagnostics", image: "./public/process-banner.webp" }
+        ]
+      },
+      {
+        title: "MEASURING VISCOSITY",
+        items: [
+          { name: "Measuring Stirrers", description: "Measure and control viscosity with stirring", image: "./public/process-banner.webp" },
+          { name: "Viscometers", description: "Precise viscosity measurement instruments", image: "./public/proc_technikum.jpg" }
+        ]
+      },
+      {
+        title: "HEATING / COOLING / TEMPERING",
+          items: [
+            { name: "Dry Block Heater", description: "Compact heating for tubes and vials", image: "./public/process-banner.webp" },
+            { name: "Heating Baths", description: "Temperature-controlled heating baths", image: "./public/proc_technikum.jpg" },
+            { name: "Hot Plates", description: "Reliable flat-surface heating", image: "./public/process_sized.jpg" },
+            { name: "Temperature Control", description: "Precise heating and cooling regulation", image: "./public/proc_technikum.jpg" },
+            { name: "Tempering Chambers", description: "Chambers for controlled sample conditioning", image: "./public/process-banner.webp" }
+        ]
+      }
+    ],
+  },
+   "BIOPROCESSING SOLUTIONS": {
+    image: "./public/start_4_divisions_bio_new4.webp",
+    color: "bg-gray-600",
+    description: "Advanced bioreactor systems for pharmaceutical applications",
+    isActive: false,
+    categories: [
+      {
+        title: "BIOREACTORS",
+        items: [
+          { name: "HABITAT eco", description: "Energy-efficient bioreactor for cell growth", image: "./public/process-banner.webp" },
+          { name: "HABITAT cyt", description: "Optimized bioreactor for cytological research", image: "./public/proc_technikum.jpg" },
+          { name: "Single-Use Systems", description: "Flexible bioreactors for sterile workflows", image: "./public/process_sized.jpg" }
+        ]
+      },
+      {
+        title: "FERMENTATION",
+        items: [
+          { name: "Microbial Fermentation", description: "Systems for scalable microbial fermentation", image: "./public/proc_technikum.jpg" },
+          { name: "Cell Culture", description: "Specialized solutions for mammalian cell growth", image: "./public/process-banner.webp" },
+          { name: "Perfusion Systems", description: "Continuous culture solutions with perfusion", image: "./public/process_sized.jpg" }
+        ]
+      }
+    ],
+  },
+  "EV BATTERY SOLUTIONS": {
+    image: "./public/start_4_divisions_bat.webp",
+    color: "bg-gray-600",
+    description: "Cutting-edge solutions for EV battery manufacturing",
+    isActive: false,
+    categories: [
+      {
+        title: "MATERIAL PROCESSING",
+        items: [
+          { name: "Cathode Materials", description: "Materials engineered for high-performance cathodes", image: "./public/process_sized.jpg" },
+          { name: "Anode Materials", description: "Optimized materials for efficient anodes", image: "./public/proc_technikum.jpg" },
+          { name: "Electrolyte Prep", description: "Preparation systems for battery electrolytes", image: "./public/process-banner.webp" }
+        ]
+      },
+      {
+        title: "CELL MANUFACTURING",
+        items: [
+          { name: "Electrode Coating", description: "Uniform coating systems for battery electrodes", image: "./public/proc_technikum.jpg" },
+          { name: "Cell Assembly", description: "Automation-ready cell assembly equipment", image: "./public/process_sized.jpg" },
+          { name: "Formation", description: "Formation systems for cell activation and testing", image: "./public/process-banner.webp" }
+        ]
+      }
+    ],
+  },
+  "PROCESS TECHNOLOGY": {
+    image: "./public/process_b.webp",
+    color: "bg-gray-600",
+    description: "Industrial-scale processing equipment and pilot plants",
+    isActive: false,
+    categories: [
+      {
+        title: "REACTOR SYSTEMS",
+        items: [
+          { name: "Synthesis Reactors", description: "Reactors for chemical synthesis applications", image: "./public/proc_technikum.jpg" },
+          { name: "High Viscosity Reactors", description: "Specialized reactors for high-viscosity media", image: "./public/process_sized.jpg" }
+        ]
+      },
+      {
+        title: "VACUUM TECHNOLOGY",
+        items: [
+          { name: "Vacuum Pumps", description: "Reliable vacuum generation systems", image: "./public/process-banner.webp" },
+          { name: "Controllers", description: "Precision control of vacuum environments", image: "./public/proc_technikum.jpg" },
+          { name: "Systems", description: "Integrated vacuum system solutions", image: "./public/process_sized.jpg" }
+        ]
+      },
+      {
+        title: "LIQUID HANDLING",
+        items: [
+          { name: "Pipettes", description: "Accurate liquid dispensing tools", image: "./public/process-banner.webp" }
+        ]
+      },
+      {
+        title: "CONTROLLING & MEASURING",
+        items: [
+          { name: "Laboratory Software", description: "Software for data acquisition and control", image: "./public/proc_technikum.jpg" }
+        ]
+      },
+      {
+        title: "CALORIMETRY",
+        items: [
+          { name: "Calorimeters", description: "Measure thermal reactions with precision", image: "./public/process_sized.jpg" },
+          { name: "Decomposition Systems", description: "Analyze material breakdown safely", image: "./public/process-banner.webp" }
+        ]
+      },
+      {
+        title: "FLOW CHEMISTRY",
+        items: [
+          { name: "FLOW System", description: "Continuous chemical reaction systems", image: "./public/proc_technikum.jpg" }
+        ]
+      }
+    ],
+
+  },
+};
+
+
+let activeDivision = Object.keys(megaMenuData).find(k => megaMenuData[k].isActive);
+
+function renderMegaMenu() {
+  const sidebar = document.getElementById("megaMenuSidebar");
+  const categories = document.getElementById("megaMenuCategories");
+  const featured = document.getElementById("megaMenuFeatured");
+  sidebar.innerHTML = "";
+
+  // Render divisions
+  Object.keys(megaMenuData).forEach(name => {
+    const division = megaMenuData[name];
+    const div = document.createElement("div");
+    div.className = `
+        p-3 rounded-lg flex gap-3 text-gray-700 cursor-pointer items-center 
+        ${activeDivision === name ? "text-white bg-[#00599c]" : "bg-gray-100"}
+
+    `;
+    div.innerHTML = `
+      <div class="w-16 h-16 bg-white/20 rounded flex items-center justify-center">
+        <img src="${division.image}" class="max-w-full max-h-full">
+      </div>
+      <span class="text-sm font-medium  ">${name}</span>
+    `;
+    div.addEventListener("mouseenter", () => {
+      activeDivision = name;
+      renderMegaMenu();
+    });
+    sidebar.appendChild(div);
+  });
+
+  const current = megaMenuData[activeDivision];
+
+  // Render categories & items
+  categories.innerHTML = current.categories.map(cat => `
+    <div>
+      <h3 class="text-sm font-semibold text-gray-900 uppercase">${cat.title}</h3>
+      <ul class="space-y-2 mt-2">
+        ${cat.items.map(item => `
+          <li>
+            <a href="#"
+               class="block text-sm text-gray-600 hover:text-[#00599c]  mega-item"
+               data-division="${activeDivision}"
+               data-item="${item.name}">
+              ${item.name}
+            </a>
+          </li>`).join("")}
+      </ul>
+    </div>
+  `).join("");
+
+  // Default featured (division)
+  featured.innerHTML = `
+    <div class="bg-gray-50 rounded-lg p-6 h-full">
+      <img src="${current.image}" class="w-full h-40 object-cover mb-4 rounded">
+      <h4 class="text-lg font-bold text-[#00599c]">${activeDivision}</h4>
+      <p class="text-sm text-gray-600 mt-2">${current.description}</p>
+      <button class="mt-4 bg-[#00599c]  text-white py-2 px-4 rounded w-full">Learn More</button>
+    </div>
+  `;
+
+  // Add hover listeners to items
+  document.querySelectorAll(".mega-item").forEach(el => {
+    el.addEventListener("mouseenter", () => {
+      const divName = el.dataset.division;
+      const itemName = el.dataset.item;
+      const division = megaMenuData[divName];
+      let found;
+      division.categories.forEach(cat => {
+        const match = cat.items.find(i => i.name === itemName);
+        if (match) found = match;
+      });
+      if (found) {
+        featured.innerHTML = `
+          <div class="bg-gray-50 rounded-lg p-6 h-full">
+            <img src="${found.image}" class="w-full h-40 object-cover mb-4 rounded">
+            <h4 class="text-lg font-bold text-[#00599c] ">${found.name}</h4>
+            <p class="text-sm text-gray-600 mt-2">${found.description}</p>
+            <button class="mt-4 bg-[#00599c]  text-white py-2 px-4 rounded w-full">Learn More</button>
+          </div>
+        `;
+      }
+    });
+  });
+}
+
+renderMegaMenu();
+
+// Hover toggle with delay
+const productsMenu = document.getElementById("productsMenu");
+const megaMenu = document.getElementById("megaMenu");
+
+let closeTimeout;
+
+function showMegaMenu() {
+  clearTimeout(closeTimeout);
+  megaMenu.classList.remove("hidden");
+}
+
+function hideMegaMenu() {
+  megaMenu.classList.add("hidden");
+}
+
+function scheduleHideMegaMenu() {
+  clearTimeout(closeTimeout);
+  closeTimeout = setTimeout(() => {
+    hideMegaMenu();
+  }, 500); // 0.5 second delay
+}
+
+productsMenu.addEventListener("mouseenter", showMegaMenu);
+productsMenu.addEventListener("mouseleave", scheduleHideMegaMenu);
+
+megaMenu.addEventListener("mouseenter", showMegaMenu);
+megaMenu.addEventListener("mouseleave", scheduleHideMegaMenu);
+
+</script>
+<!-- END OF MEGA MENU SCRIPT -->
+
+<!-- START MOBILE MENU SCRIPT -->
+<script>
+// Product categories
+const productCategories = {
+  Lab: [
+    { id: "bioprocessing", name: "Bioprocessing", image: "./public/product1.webp", sub: ["Bioreactors"] },
+    { id: "electrochemistry", name: "Electrochemistry", image: "./public/product2.webp", sub: ["Electrochemistry Kit", "Screening System"] },
+    { id: "mixing", name: "Mixing", image: "./public/product3.webp", sub: ["Magnetic Stirrers", "Overhead Stirrers"] },
+  ],
+  Process: [
+    { id: "pilot_plant", name: "Pilot Plant", image: "./public/product4.webp", sub: ["Magic Lab","LABOR-PILOT","PROCESS-PILOT","magic PLANT"] },
+    { id: "inline_dispersersm_ills", name: "Inline dispersers / Mills", image: "./public/process1.webp", sub: ["ULTRA-TURRAX UTL","UTL Economy Line","DISPAX-REACTOR DR"] },
+  ],
+  Biosolution: [
+    { id: "cell_culture", name: "Cell Culture", image: "./public/process2.webp", sub: ["Bioreactor Classic","Wave Bioreactor","Single-Use Bioreactor"] },
+    { id: "fermentation", name: "Fermentation", image: "./public/process2.webp", sub: ["Bench-top Fermentor","Pilot-scale Fermentor","Industrial Fermentor"] },
+  ],
+  "EV-battery": [
+    { id: "battery_types", name: "Battery Types", image: "./public/product3.webp", sub: ["Lithium-Ion","Solid State","Nickel-Metal Hydride"] },
+    { id: "battery_components", name: "Battery Components", image: "./public/product4.webp", sub: ["Anodes","Cathodes","Electrolytes","Battery Management Systems (BMS)"] },
+  ]
+};
+
+// Navigation items example
+const navigationItems = [
+  { name: "Services", href: "/services", hasDropdown: false },
+  { name: "Knowledge Center", href: "/knowledge", hasDropdown: false },
+  { name: "Company", href: "/company", hasDropdown: true },
+  { name: "Career", href: "/career" },
+  { name: "Contact", href: "/contact", hasDropdown: true },
+];
+
+// Example dropdown items
+const productSubItems = [
+  { label: "Bioreactors", image: "/product1.webp" },
+  { label: "Electrochemistry Kit", image: "/product2.webp" },
+];
+
+// Active dropdown tracking
+let activeDropdown = "";
+
+// Active tab
+let activeTab = "Lab";
+
+// Render categories
+function renderCategories(containerId, tab) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+  productCategories[tab].forEach(cat => {
+    const div = document.createElement("div");
+    div.className = "mb-2";
+
+    const btn = document.createElement("button");
+    btn.className = "w-full flex items-center p-3 text-left hover:bg-gray-50 rounded-lg transition-colors";
+    btn.innerHTML = `<img src="${cat.image}" class="rounded-sm w-16 mr-4"/>${cat.name}<span class="ml-auto">+</span>`;
+    
+    btn.onclick = () => {
+      const expanded = div.querySelector(".subcats");
+      if(expanded) {
+        expanded.remove();
+        btn.querySelector("span").innerText = "+";
+      } else {
+        const subDiv = document.createElement("div");
+        subDiv.className = "subcats ml-4 mt-2 space-y-1";
+        cat.sub.forEach(sub => {
+          const subBtn = document.createElement("button");
+          subBtn.className = "w-full text-left p-2 rounded-md hover:bg-gray-100 text-gray-700";
+          subBtn.innerText = sub;
+          subDiv.appendChild(subBtn);
+        });
+        div.appendChild(subDiv);
+        btn.querySelector("span").innerText = "-";
+      }
+    }
+
+    div.appendChild(btn);
+    container.appendChild(div);
+  });
+}
+
+// Render nav items
+function renderNavItems() {
+  const navContainer = document.getElementById("navItems");
+  navContainer.innerHTML = "";
+  navigationItems.forEach(item => {
+    const div = document.createElement("div");
+    div.className = item.name + "link";
+
+    const btn = document.createElement("button");
+    btn.className = "text-left py-2 px-3 rounded-md text-gray-700 hover:bg-gray-50 w-full";
+    btn.innerText = item.name;
+    btn.onclick = () => {
+      if(item.hasDropdown) {
+        activeDropdown = activeDropdown === item.name ? "" : item.name;
+        renderDropdownImages(div);
+      }
+    }
+
+    div.appendChild(btn);
+    navContainer.appendChild(div);
+  });
+}
+
+// Render dropdown images if "Products" is active
+function renderDropdownImages(parentDiv) {
+  const existing = parentDiv.querySelector(".dropdown");
+  if(existing) {
+    existing.remove();
+    return;
+  }
+  const dropdown = document.createElement("div");
+  dropdown.className = "dropdown w-full grid grid-cols-2 gap-4 p-4";
+  productSubItems.forEach(sub => {
+    const subDiv = document.createElement("div");
+    subDiv.className = "cursor-pointer hover:scale-105 transition-transform";
+
+    const img = document.createElement("img");
+    img.src = sub.image;
+    img.alt = sub.label;
+    img.className = "w-full h-24 object-cover rounded-md";
+
+    const p = document.createElement("p");
+    p.className = "text-center mt-2 text-sm font-medium";
+    p.innerText = sub.label;
+
+    subDiv.appendChild(img);
+    subDiv.appendChild(p);
+    dropdown.appendChild(subDiv);
+  });
+  parentDiv.appendChild(dropdown);
+}
+
+// Desktop tabs
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    activeTab = btn.dataset.tab;
+    renderCategories("categories", activeTab);
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("border-[#00599c]","text-[#00599c]"));
+    btn.classList.add("border-[#00599c]","text-[#00599c]");
+    btn.classList.remove("border-transparent","text-gray-600");
+  });
+});
+
+// Initial render
+renderCategories("categories", activeTab);
+renderNavItems();
+document.querySelector('.tab-btn[data-tab="Lab"]').classList.add("border-[#00599c]","text-[#00599c]");
+document.querySelector('.tab-btn[data-tab="Lab"]').classList.remove("border-transparent","text-gray-600");
+
+// Mobile menu toggle
+const mobileMenu = document.getElementById("mobileMenu");
+document.getElementById("mobileMenuBtn").addEventListener("click", () => {
+  mobileMenu.classList.remove("-translate-x-full");
+});
+document.getElementById("closeMobileMenu").addEventListener("click", () => {
+  mobileMenu.classList.add("-translate-x-full");
+});
+</script>
+<!-- END OF MOBILE MENU SCRIPT -->
+
+
+
+
+  <script>
+    lucide.createIcons()
+
+    const emblaNode = document.querySelector('.embla')
+    const viewportNode = emblaNode.querySelector('.embla__viewport')
+    const prevBtn = document.getElementById('prevHero')
+    const nextBtn = document.getElementById('nextHero')
+    const dotsNode = document.getElementById('heroDots')
+
+    const emblaApi = EmblaCarousel(viewportNode, { loop: true })
+    const scrollSnaps = emblaApi.scrollSnapList()
+    const dots = scrollSnaps.map(() => {
+      const dot = document.createElement('button')
+      dot.className = 'embla__dot'
+      dotsNode.appendChild(dot)
+      dot.addEventListener('click', () => emblaApi.scrollTo(dots.indexOf(dot)))
+      return dot
+    })
+
+    const setSelectedDot = () => {
+      const selectedIndex = emblaApi.selectedScrollSnap()
+      dots.forEach((dot, i) =>
+        dot.classList.toggle('embla__dot--selected', i === selectedIndex)
+      )
+    }
+
+    prevBtn.addEventListener('click', emblaApi.scrollPrev)
+    nextBtn.addEventListener('click', emblaApi.scrollNext)
+
+    emblaApi.on('select', setSelectedDot)
+    emblaApi.on('init', setSelectedDot)
+  </script>
+
 </html>

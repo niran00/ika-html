@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hero Embla Carousel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .heroEmbla .embla {
+      position: relative;
+      overflow: hidden;
+    }
+    .heroEmbla .embla__container {
+      display: flex;
+    }
+    .heroEmbla  .embla__slide {
+      flex: 0 0 100%;
+      min-width: 0;
+    }
+    .heroEmbla  .embla__button {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 9999px;
+      padding: 0.75rem;
+      transition: all 0.2s;
+    }
+    .heroEmbla  .embla__button:hover {
+      background: #00599c;
+      color: #fff;
+    }
+    .heroEmbla  .embla__dots {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.5rem;
+    }
+    .heroEmbla  .embla__dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ccc;
+      transition: background 0.3s;
+    }
+    .heroEmbla  .embla__dot--selected {
+      background: #00599c;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <div class="heroEmbla">
+    <section class="embla w-full mx-auto rounded-2xl shadow-2xl overflow-hidden">
+    <div class="embla__viewport">
+      <div class="embla__container">
+
+        <!-- Slide 1 -->
+        <div class="embla__slide relative w-full min-h-[500px]">
+          <img src="/banner.png" alt="IKA Company Building" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 flex flex-col max-w-5xl mx-auto justify-start items-start py-8 px-6">
+            <h2 class="text-2xl lg:text-4xl text-[#00599c] my-4">Your Partner for Research & Production</h2>
+            <p class="text-md lg:text-lg leading-relaxed text-[#464646]">
+              Our core competencies are mixing, dispersing, separation, and temperature control. From<br/>
+              R&amp;D to full-scale production, we help you efficiently scale your processes and products.
+            </p>
+            <div class="flex mt-6">
+              <button class="text-white bg-[#00599c] mr-6 px-8 py-3 rounded-md hover:bg-transparent hover:text-[#00599c] border-2 border-[#00599c] transition">
+                View Solutions
+              </button>
+              <button class="border-2 border-[#00599c] text-[#00599c] hover:bg-[#00599c] hover:text-white px-8 py-3 rounded-md bg-transparent transition">
+                Contact Us
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="embla__slide relative w-full min-h-[500px]">
+          <img src="/banner2.png" alt="IKA Lab Equipment" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 flex flex-col max-w-5xl mx-auto justify-start items-start py-8 px-6">
+            <h2 class="text-2xl lg:text-4xl text-[#00599c] my-4">Innovative Lab Technology</h2>
+            <p class="text-md lg:text-lg leading-relaxed text-[#464646]">
+              Cutting-edge laboratory solutions to enhance efficiency and innovation in scientific research.
+            </p>
+            <div class="flex mt-6">
+              <button class="text-white bg-[#00599c] mr-6 px-8 py-3 rounded-md hover:bg-transparent hover:text-[#00599c] border-2 border-[#00599c] transition">
+                Explore Products
+              </button>
+              <button class="border-2 border-[#00599c] text-[#00599c] hover:bg-[#00599c] hover:text-white px-8 py-3 rounded-md bg-transparent transition">
+                Learn More
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="embla__slide relative w-full min-h-[500px]">
+          <img src="/banner3.png" alt="IKA Global Network" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 flex flex-col max-w-5xl mx-auto justify-start items-start py-8 px-6">
+            <h2 class="text-2xl lg:text-4xl text-[#00599c] my-4">Global Expertise, Local Support</h2>
+            <p class="text-md lg:text-lg leading-relaxed text-[#464646]">
+              Trusted worldwide with local expertise to provide support and service whenever you need it.
+            </p>
+            <div class="flex mt-6">
+              <button class="text-white bg-[#00599c] mr-6 px-8 py-3 rounded-md hover:bg-transparent hover:text-[#00599c] border-2 border-[#00599c] transition">
+                Find Us
+              </button>
+              <button class="border-2 border-[#00599c] text-[#00599c] hover:bg-[#00599c] hover:text-white px-8 py-3 rounded-md bg-transparent transition">
+                Contact Team
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Arrows -->
+    <button class="embla__button absolute top-1/2 left-4 -translate-y-1/2" id="prevHero">
+      <i data-lucide="chevron-left"></i>
+    </button>
+    <button class="embla__button absolute top-1/2 right-4 -translate-y-1/2" id="nextHero">
+      <i data-lucide="chevron-right"></i>
+    </button>
+
+    <!-- Dots -->
+    <div class="embla__dots" id="heroDots"></div>
+  </section>
+
+  </div>  
+  
+
+  <script>
+    lucide.createIcons()
+
+    const emblaNode = document.querySelector('.embla')
+    const viewportNode = emblaNode.querySelector('.embla__viewport')
+    const prevBtn = document.getElementById('prevHero')
+    const nextBtn = document.getElementById('nextHero')
+    const dotsNode = document.getElementById('heroDots')
+
+    const emblaApi = EmblaCarousel(viewportNode, { loop: true })
+    const scrollSnaps = emblaApi.scrollSnapList()
+    const dots = scrollSnaps.map(() => {
+      const dot = document.createElement('button')
+      dot.className = 'embla__dot'
+      dotsNode.appendChild(dot)
+      dot.addEventListener('click', () => emblaApi.scrollTo(dots.indexOf(dot)))
+      return dot
+    })
+
+    const setSelectedDot = () => {
+      const selectedIndex = emblaApi.selectedScrollSnap()
+      dots.forEach((dot, i) =>
+        dot.classList.toggle('embla__dot--selected', i === selectedIndex)
+      )
+    }
+
+    prevBtn.addEventListener('click', emblaApi.scrollPrev)
+    nextBtn.addEventListener('click', emblaApi.scrollNext)
+
+    emblaApi.on('select', setSelectedDot)
+    emblaApi.on('init', setSelectedDot)
+  </script>
+</body>
+</html>
